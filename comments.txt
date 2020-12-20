@@ -1,0 +1,16 @@
+Files needed: script.txt
+Outputs: bigram.txt, output.txt
+
+Made program run super fast using a bit of a complicated data structure to store the CDF
+A HashMap<String, TreeMap<Double, String>>
+the HashMap maps the substring (the "XY" in "Z|XY" for example) to the key of the
+CDF which lives inside the TreeMap<Double, String>. Then an Entry can be found using the RNG output to get
+the String out
+
+Now instead of 20ish seconds of calculating the CDF every time a new character is generated, it's all done once
+Takes under a second on my computer :)
+
+----------OLD-------
+Program completed pretty much instantaneously when I used a default value for ngrams that don't occur in the script (and therefore contain no value in the map)
+BUT for proper laplace smoothing calculations, I threw in a recursive method to generate all possible keys of a certain length... 27^2 + 27^3 is a lot
+of extra probabilities to store in the hashmap and cycle through for the CDF.
